@@ -26,8 +26,8 @@ dependencies {
     implementation 'com.google.guava:guava:28.0-jre'
 
     // Use JUnit test framework
-     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
-    implementation 'com.github.MatiasM12:core:7ad1fb6fef'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    implementation 'com.github.MatiasM12:core:-SNAPSHOT'
 }
 
 tasks.named('test') {
