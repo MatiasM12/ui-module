@@ -3,6 +3,9 @@ package ui;
 import core.Persona;
 
 public class Prueba{
-	Persona pepe = new Persona("pepe",11,"");
-	
+
+    public static void main(String[] args) {
+        Persona pepe = new Persona("pepe",11,"avenida siempre viva");
+        pepe.imprimirDetalles();
+    }
 }
