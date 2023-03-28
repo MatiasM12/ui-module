@@ -1,8 +1,8 @@
 package ui;
 
-import core.Hola;
+import core.Persona;
 
 public class Pueba {
-	Hola h = new Hola();
+	Persona pepe = new Persona();
 	
 }
