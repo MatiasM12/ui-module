@@ -1,5 +1,8 @@
 package ui;
 
-public class Pueba {
+import core.Hola;
 
+public class Pueba {
+	Hola h = new Hola();
+	
 }
