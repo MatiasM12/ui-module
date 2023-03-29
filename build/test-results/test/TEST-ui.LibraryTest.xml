@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="ui.LibraryTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-03-28T03:20:25" hostname="MATY" time="0.028">
+<testsuite name="ui.LibraryTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-03-28T16:47:33" hostname="MATY" time="0.022">
   <properties/>
-  <testcase name="someLibraryMethodReturnsTrue()" classname="ui.LibraryTest" time="0.028"/>
+  <testcase name="someLibraryMethodReturnsTrue()" classname="ui.LibraryTest" time="0.022"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

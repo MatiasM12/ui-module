@@ -1,11 +1,14 @@
 package ui;
 
-import core.Persona;
+
+import core.Robot;
 
 public class Prueba{
 
     public static void main(String[] args) {
-        Persona pepe = new Persona("pepe",11,"avenida siempre viva");
-        pepe.imprimirDetalles();
+        Robot c = new Robot("",1,1);
+        c.cargarBateria();
+        c.mostrarEstado();
+        c.moverse();
     }
 }
