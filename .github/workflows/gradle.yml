@@ -45,9 +45,3 @@ jobs:
       with:
         name: my-artifact
         path: build/libs/*.jar
-        
-    - name: Publish Test Results as Github Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.TOKEN }}
-        publish_dir: ./test-results/
