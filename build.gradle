@@ -28,7 +28,7 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
-    implementation 'com.github.MatiasM12:core-module:d902e3caf1'
+    implementation 'com.github.MatiasM12:core-module:d902e3c'
 }
 
 tasks.named('test') {
