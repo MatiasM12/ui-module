@@ -36,4 +36,4 @@ jobs:
       run: ./gradlew clean
         
     - name: Build project
-      run: ./gradlew build
+      run: ./gradlew build -Dorg.gradle.project.snapshot=true
