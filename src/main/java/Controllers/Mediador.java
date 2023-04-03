@@ -29,7 +29,20 @@ public class Mediador implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-    	
+    	if((char)arg=='A') {
+    		
+    		String elementosVista = this.repoTestFinder.getUS()+"\n"
+    				+this.repoTestFinder.getPackage()+"\n"
+    				+this.repoTestFinder.getClasses()+"\n"
+    				+this.repoTestFinder.getSuccesRate()+"\n"
+    				+this.repoTestFinder.getFailures()+"\n"
+    				+this.repoTestFinder.getIgnored()+"\n"
+    				+this.repoTestFinder.getTestQuantity()+"\n";
+    			//	+this.repoTestFinder.getValidationTest();
+   	
+    		vista1.setJTextArea(elementosVista);
+    		
+    	}
     }
     
     

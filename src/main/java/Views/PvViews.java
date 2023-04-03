@@ -58,23 +58,19 @@ public class PvViews  implements Observer{
 	        this.repoTestFinder.attach(this);
 	}
 	public void update(Observable o, Object arg) {
-		String caracteresUS =  this.devolverCadena(arg);
-		this.textfield1.setText(caracteresUS);
+		
 		
 	}
 
-	private String devolverCadena(Object arg) {
-		ArrayList<String> array = (ArrayList<String>) arg;
-		String cadena = "";
-		for(int i =0;i<array.size();i++) {
-			cadena+=array.get(i)+"\n";
-		}
-		return cadena;
-	}
 	
 	public JButton getBtn() {
 		return this.btn;
 	}
+	
+	public void setJTextArea(String texto) {
+		this.textfield1.setText(texto);
+	}
+	
 	
 	
 	

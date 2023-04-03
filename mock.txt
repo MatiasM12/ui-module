@@ -1,4 +1,11 @@
-US1: TP
+US1:Vincular con PV&
+Core#
+Acceptance_test$
+100%
+5}
+0¿
+0=
+0.22"
 Test de aceptación 1
 Test de aceptación 2
 Test de aceptación 3
