@@ -3,13 +3,14 @@ package Views;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import Controllers.Mediador;
 import core.Acceptance_test;
 
 public class BotonTest implements ActionListener {
 
-	Acceptance_test modelo;
+	Mediador modelo;
 	
-	public BotonTest(Acceptance_test modelo){
+	public BotonTest(Mediador modelo){
 		this.modelo = modelo;
 	}
 	

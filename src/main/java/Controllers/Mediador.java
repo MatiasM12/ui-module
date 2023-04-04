@@ -30,7 +30,6 @@ public class Mediador implements Observer {
     @Override
     public void update(Observable o, Object arg) {
     	if((char)arg=='A') {
-    		
     		String elementosVista = this.repoTestFinder.getUS()+"\n"
     				+this.repoTestFinder.getPackage()+"\n"
     				+this.repoTestFinder.getClasses()+"\n"
@@ -39,15 +38,19 @@ public class Mediador implements Observer {
     				+this.repoTestFinder.getIgnored()+"\n"
     				+this.repoTestFinder.getTestQuantity()+"\n";
     			//	+this.repoTestFinder.getValidationTest();
-   	
     		vista1.setJTextArea(elementosVista);
-    		
     	}
     }
-    
-    
     public void activarListeners() {
     	System.out.println("sad");
-    	this.vista1.getBtn().addActionListener(new BotonTest(this.repoTestFinder));
+    	this.vista1.getBtn().addActionListener(new BotonTest(this));
     }
+    
+    
+    
+    public void buscarTest() {
+    	this.repoTestFinder.buscarTest();
+    	
+    }
+    
 }
