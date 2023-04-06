@@ -3,13 +3,13 @@ package ui;
 import Controllers.Mediador;
 import Views.PvViews;
 import Views.Vista;
-import core.Acceptance_test;
+import core.Report;
 
 public class Main {
 
     public static void main (String[] args){
-    	PvViews viewPv= new PvViews();
-    	Acceptance_test acceptanceTest = new Acceptance_test();
+    	PvViews viewPv = new PvViews();
+    	Report acceptanceTest = new Report();
         Mediador controller = new Mediador(viewPv, acceptanceTest);
     }
 }

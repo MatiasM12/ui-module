@@ -11,14 +11,14 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import Controllers.Mediador;
-import core.Acceptance_test;
+import core.Report;
 import core.RepoTestFinder;
 
-public class PvViews  implements Observer{
+public class PvViews   {
 
 	private JFrame frame;
 	protected Mediador controller;
-    protected Acceptance_test  repoTestFinder;
+    protected Report  repoTestFinder;
     JTextArea textfield1;
     JButton btn;
 	/**
@@ -32,36 +32,22 @@ public class PvViews  implements Observer{
 		
 	}
 
-	public void initialize(Mediador controller,Acceptance_test  repoTestFinder) {
+	public void initialize(Mediador controller,Report  repoTestFinder) {
 		this.controller = controller;
 		this.repoTestFinder = repoTestFinder;
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 500);	
-		textfield1=new JTextArea();
+		textfield1= new JTextArea();
 		textfield1.setBounds(50,10,0,0);
 		btn = new JButton();
-		
 		btn.setBounds(0,400,450,100);
-		
 		frame.add(btn);
 		frame.add(textfield1);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		
-		
-		
-		
 	//	this.frame.setVisible(true);
 	}
-	
-	public void suscribirseAlCore(){
-	        this.repoTestFinder.attach(this);
-	}
-	public void update(Observable o, Object arg) {
-		
-		
-	}
-
 	
 	public JButton getBtn() {
 		return this.btn;

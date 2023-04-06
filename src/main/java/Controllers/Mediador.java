@@ -3,7 +3,7 @@ package Controllers;
 import Views.BotonTest;
 import Views.PvViews;
 import Views.Vista;
-import core.Acceptance_test;
+import core.Report;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,12 +12,11 @@ import java.util.Observer;
 
 public class Mediador implements Observer {
 	PvViews vista1;
-	Acceptance_test repoTestFinder;
-    public Mediador(PvViews pvViews, Acceptance_test coreX) {
+	Report repoTestFinder;
+    public Mediador(PvViews pvViews, Report coreX) {
         this.vista1 = pvViews;
         this.repoTestFinder = coreX;
         this.vista1.initialize(this,coreX);
-        this.vista1.suscribirseAlCore();
         this.suscribirseAlCore();
         this.activarListeners();
        // coreX.notification();

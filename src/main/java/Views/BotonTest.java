@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import Controllers.Mediador;
-import core.Acceptance_test;
+import core.Report;
 
 public class BotonTest implements ActionListener {
 

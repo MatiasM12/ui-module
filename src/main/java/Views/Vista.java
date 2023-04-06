@@ -1,7 +1,7 @@
 package Views;
 
 import Controllers.Mediador;
-import core.Acceptance_test;
+import core.Report;
 import core.RepoTestFinder;
 
 import javax.naming.ldap.Control;
@@ -10,7 +10,7 @@ import java.util.Observer;
 
 public class Vista implements Observer {
     protected Mediador controller;
-    protected Acceptance_test  coreX ;
+    protected Report  coreX ;
 
     public Vista(RepoTestFinder coreX) {
         //        repoTestFinde.attach(this);
