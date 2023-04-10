@@ -4,29 +4,21 @@ import java.util.ArrayList;
 
 import Controllers.ReportController;
 import Views.ReportView;
-import core.Init;
-import core.Observer;
-import core.Report;
-import core.ReportUpdater;
+import core.Core;
 
 public class Main {
 
 	 public static void main(String[] args) {
 
-		ArrayList<Observer> observers = new ArrayList<Observer>();   	
-		Report report = new Report(observers, 100, null);
-		ReportUpdater updater = new ReportUpdater(report);
+		//yo creo que esto esta re mal jaja
+		Core core = new Core();
+		core.init();
 		
-		ReportController controller = new ReportController(updater);
-		report.addObserver(controller);
+		ReportController controller = new ReportController(core.updater);
+		core.report.addObserver(controller);
 		
 		ReportView view = new ReportView(controller);
-		view.createWindow();
-		
-		
-		//yo creo que esto esta re mal jaja
-		Init init = new Init();
-		init.checker.addObserver(updater);
+		view.createWindow(core);//yo creo que esto esta re mal jaja
 		
 
 	 }

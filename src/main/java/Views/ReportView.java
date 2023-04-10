@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import Controllers.ReportController;
+import core.Core;
 
 import java.awt.Container;
 
@@ -21,7 +22,7 @@ public class ReportView extends JFrame {
     	controller.updateReport();
     }
 	
-	public void createWindow() {
+	public void createWindow(Core core) {
 		setTitle("Proyecto Valquiria");
         setSize(400, 300);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -40,6 +41,7 @@ public class ReportView extends JFrame {
             System.out.println("¡Botón Iniciar presionado!");
             btnStart.setVisible(false);
             labelTest.setVisible(true);
+            core.initChecker();//yo creo que esto esta re mal jaja
             notifyController();
         });
         
