@@ -8,17 +8,16 @@ public class Main {
 
 	 public static void main(String[] args) {
 
-		App pv = new App();
-		pv.initChecker();
+		App pvCore = new App();
+		pvCore.initChecker();
 		
 		ReportView view = new ReportView();
 		
-		ReportController controller = new ReportController(pv.updater,view);
-		pv.report.addObserver(controller);
+		ReportController controller = new ReportController(pvCore.updater,view);
+		pvCore.report.addObserver(controller);
 		
 		view.initWindow();
 		
 	 }
-
 
 }
