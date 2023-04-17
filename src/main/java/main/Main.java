@@ -19,7 +19,7 @@ public class Main {
 		
 		ReportController controller = new ReportController(containerAssembler.container,view);
 		
-		
+		//le llegue el update
 		pv.update();
 	 }
 
