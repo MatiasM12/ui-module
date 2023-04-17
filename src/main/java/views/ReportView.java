@@ -32,7 +32,7 @@ public class ReportView {
 		Image image = icon.getImage();
 		frame.setIconImage(image);
 		frame.setTitle("Proyecto Valquiria");
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(700, 300, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
