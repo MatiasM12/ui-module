@@ -1,23 +1,16 @@
 package main;
-
-import controllers.ReportController;
 import core.App;
-import views.ReportView;
+import core.PvCore;
+//import views.ReportView;
 
 public class Main {
 
 	 public static void main(String[] args) {
-
-		App pvCore = new App();
-		pvCore.initChecker();
+		PvCore core = new PvCore();
 		
-		ReportView view = new ReportView();
 		
-		ReportController controller = new ReportController(pvCore.updater,view);
-		pvCore.report.addObserver(controller);
 		
-		view.initWindow();
-		
+		core.init();
 	 }
 
 }

@@ -4,9 +4,43 @@
 package ui;
 
 import org.junit.jupiter.api.Test;
+
+import core.AcceptenceTest;
+import core.PvCore;
+import core.ReportResult;
+import core.ReportsContainer;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-class LibraryTest {
-    @Test void someLibraryMethodReturnsTrue() {
+import java.util.ArrayList;
+import java.util.Collection;
+
+class LibraryTest<ReportContainer> {
+	
+	private PvCore pv = new PvCore();
+	private ReportsContainer reportContainer  = new ReportsContainer();
+	
+	
+    @Test void agregarReporte() {
+    	pv.init();
+    	reportContainer.addNewReport();
+    	assertEquals(1, reportContainer.sizeOfReports());
     }
+    
+    @Test void crearReporte () {
+    	ReportResult  re = reportContainer.addNewReport();
+    	Collection<ReportResult> reportes = new ArrayList<ReportResult>();
+    	assertEquals(100.00, re.getSuccedRate());
+    	assertEquals(1, re.getTests());
+    	assertEquals("USER STORY 1", re.getAssociatedUs());
+    }
+    
+    @Test void createReportContainer(){
+    	
+    	
+    	
+    	
+    }
+    
+    
 }
