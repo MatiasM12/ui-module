@@ -1,23 +1,26 @@
 package main;
 
 import controllers.ReportController;
-import core.App;
+import core.PvCore;
+import core.ReportContainerAssembler;
+import core.ReportResultAssembler;
 import views.ReportView;
 
 public class Main {
 
 	 public static void main(String[] args) {
 
-		App pvCore = new App();
-		pvCore.initChecker();
+		ReportResultAssembler reportAssembler = new ReportResultAssembler();
+		ReportContainerAssembler containerAssembler = new ReportContainerAssembler();
+		PvCore pv = new PvCore();
+		pv.init(reportAssembler, containerAssembler);
 		
 		ReportView view = new ReportView();
 		
-		ReportController controller = new ReportController(pvCore.updater,view);
-		pvCore.report.addObserver(controller);
+		ReportController controller = new ReportController(containerAssembler.container,view);
 		
-		view.initWindow();
 		
+		pv.update();
 	 }
 
 }

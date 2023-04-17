@@ -1,48 +1,101 @@
 package views;
 
+import java.awt.EventQueue;
+import java.awt.Image;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+import javax.swing.JPanel;
+import java.awt.Color;
+import javax.swing.border.LineBorder;
 
-import core.Report;
+public class ReportView {
 
-public class ReportView extends JFrame  {
-
-	private static final long serialVersionUID = 1L;
-	public JLabel labelSuccessRate;
-    public JLabel labelTest;
+	private JFrame frame;
+	private JLabel titulo;
 	
-    public ReportView() {
-    }
-    
-    public void refresh(Report newReport) {
-    	labelSuccessRate.setText(String.valueOf(newReport.successRate)+"%");
-    	labelTest.setText(newReport.testList.toString());
-    	repaint();
-    }
 
-	public void initWindow() {
-		setTitle("Proyecto Valquiria");
-        setSize(600, 300);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
-        labelSuccessRate = createLabel(labelSuccessRate,"100 %");
-        labelTest = createLabel(labelTest,"Name = Test 1, SuccessRate = true");
-        
-        add(labelSuccessRate);
-        add(labelTest);
-        
-        labelTest.setBounds(0, 250, 300, 50);
-        labelSuccessRate.setBounds(140, 150, 300, 50);
-        labelTest.setHorizontalAlignment(SwingConstants.CENTER);
-        labelSuccessRate.setHorizontalAlignment(SwingConstants.CENTER);
-        
-        setVisible(true);
+	public ReportView() {
+		initialize();
 	}
 
-	public JLabel createLabel(JLabel label,String text) {
-		label = new JLabel(text);
-		return label;
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		ImageIcon icon = new ImageIcon("icon.png");
+		Image image = icon.getImage();
+		frame.setIconImage(image);
+		frame.setTitle("Proyecto Valquiria");
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		titulo = new JLabel("");
+		titulo.setBounds(10, 11, 352, 14);
+		frame.getContentPane().add(titulo);
+		this.frame.setVisible(true);
+					
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {		
+					setTitle("User Story: Actualizacion de reportes");
+					Map<String,Boolean> map = new HashMap<String,Boolean>();
+					map.put("Iniciar Core", true);
+					map.put("Buscar Reporte nuevo", true);
+					map.put("Crear Reporte ", true);
+					map.put("Devolver Reporte", true);
+					setDinamicPanels(map);
+				} catch (Exception e) {
+					e.printStackTrace();
+				} 
+			}
+		});
 	}
 
+	
+	
+	public void  setDinamicPanels(Map<String,Boolean> test){
+		Iterator<String> it = test.keySet().iterator();
+		int i = 0;
+		while(it.hasNext()){
+			String key = it.next();
+			
+			JPanel panel = new JPanel();
+			panel.setBounds(10, 50*(i+1), 404, 36);
+			panel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+			frame.getContentPane().add(panel);
+			panel.setLayout(null);
+			
+			JLabel tituloCritero = new JLabel("CA "+(i+1)+" : "+key);
+			tituloCritero.setBounds(0, 0, 217, 14);
+			panel.add(tituloCritero);
+			
+			JPanel panel_1 = new JPanel();
+		
+			if(test.get(key) == true)
+				panel_1.setBackground(Color.GREEN);
+			else
+				panel_1.setBackground(Color.RED);
+			panel_1.setBounds(384, 0, 20, 36);
+			panel.add(panel_1);
+			
+			i++;
+		}
+		
+	}
+	
+	
+	public void setTitle(String title) {
+		this.titulo.setText(title);
+		
+	}
+	
+	
+	
 }
