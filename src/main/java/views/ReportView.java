@@ -1,5 +1,9 @@
 package views;
 
+import controllers.ReportController;
+import core.Observer;
+import core.PvCore;
+
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.util.HashMap;
@@ -13,13 +17,22 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
 
-public class ReportView {
+public class ReportView implements Observer {
 
 	private JFrame frame;
 	private JLabel titulo;
+
+	private ReportController controlador;
 	
 
-	public ReportView() {
+	public ReportView(PvCore core) {
+			//3 La vista se suscribe como observador del modelo (attach).
+		core.addObserver(this);
+
+			//4 La vista crea el controlador, pasandose como referencia a si mismo y al modelo
+		this.controlador = new ReportController(this, core);
+
+
 		initialize();
 	}
 
@@ -95,7 +108,11 @@ public class ReportView {
 		this.titulo.setText(title);
 		
 	}
-	
-	
-	
+
+
+	@Override
+	public void update() {
+		//traer datos de reporte
+		System.out.println("Soy la ventana de la UI ejecutando update()");
+	}
 }

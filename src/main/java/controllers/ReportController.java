@@ -3,24 +3,25 @@ package controllers;
 import java.util.Map;
 
 import core.Observer;
-import core.ReportsContainer;
+import core.PvCore;
+import core.ReportResult;
 import views.ReportView;
 
 public class ReportController implements Observer {
 
-	public ReportsContainer container;
-	public ReportView view;
+	private ReportView view;
+	private PvCore core;
 	
-	public ReportController(ReportsContainer container, ReportView view) {
-		super();
-		this.container = container;
-		this.view = view;
-		container.addObserver(this);
+	public ReportController(ReportView vista, PvCore core){
+		this.view = vista;
+		this.core = core;
+
+			//5 El controlador se suscribe como Observador del modelo
+		this.core.addObserver(this);
 	}
  
-	@Override
+	@Override //FIXME: 23/04/2023
 	public void update() {
-		Map<String,Boolean> testList = container.reports.get(0).getTests();
-		view.setDinamicPanels(testList);
+		ReportResult reporte = this.core.getReport();
 	}
 }
