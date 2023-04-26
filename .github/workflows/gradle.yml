@@ -41,6 +41,12 @@ jobs:
     - name: Test with Gradle
       run: ./gradlew test
       
+    - name: Publish artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: my-artifact
+        path: build/libs/*.jar   
+        
     - name: Upload Test Results
       uses: actions/upload-artifact@v2
       with:
