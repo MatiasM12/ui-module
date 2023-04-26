@@ -61,5 +61,5 @@ jobs:
     - name: Publish Test Results as Github Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
-        github_token: ${{ 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 }}
+        github_token: ${{ secrets.TOKEN }}
         publish_dir: ./test-results/
