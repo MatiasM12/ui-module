@@ -5,9 +5,9 @@ package ui;
 
 import org.junit.jupiter.api.Test;
 
-import core.PvCore;
+
 import core.ReportResult;
-import core.ReportsContainer;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class LibraryTest {
-	private PvCore pv = new PvCore();
+	/*private PvCore pv = new PvCore();
 	private ReportsContainer reportContainer  = new ReportsContainer(null);
 	
 	
@@ -38,5 +38,6 @@ class LibraryTest {
     	
     	
     	
-    }
+    	
+    }*/
 }

@@ -10,16 +10,30 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import controllers.Controlador;
+
 public class Main {
-	static String trackerDirectoryPath = "C:\\Users\\Usuario\\IntelliJ-Workspace\\VALKIRIA\\core-module\\build\\classes\\java\\main\\InterfacesImpl";
+	static String trackerDirectoryPath = "C:\\Users\\Nicol\\git\\core-module2\\bin\\main\\InterfacesImpl";
 	static String trackerImpl = "InterfacesImpl.DefaultReportTracker";
 	static String reportDirectoryPath = "reportPath";
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
+		//** Aca creo la vista
+		//devuelvo el string
+		//se lo paso por parametro al init core
+		ReportView view = new ReportView();
+		Controlador c = new Controlador(view);
+		
+		/*
+		while(view.getClickSi()==false) {
+			System.out.println("");
+			continue;
+		};
+		System.out.println("Pase");*/
+		
 		InitCore initCore = new InitCore(trackerDirectoryPath);
 		Core core = initCore.init(trackerImpl,reportDirectoryPath);
-
-		ReportView view = new ReportView(core);
+		core.subscribe(view);
 
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
