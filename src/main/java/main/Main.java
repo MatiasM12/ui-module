@@ -1,7 +1,7 @@
 package main;
 
-import core.Core;
 import core.InitCore;
+import core.Integrator;
 import views.ReportView;
 
 import java.io.IOException;
@@ -10,41 +10,30 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import controllers.Controlador;
 
 public class Main {
 	static String trackerDirectoryPath = "C:\\Users\\Nicol\\git\\core-module2\\bin\\main\\InterfacesImpl";
 	static String trackerImpl = "InterfacesImpl.DefaultReportTracker";
-	static String reportDirectoryPath = "reportPath";
-
+	static String reportDirectoryPath = "C:\\Users\\Nicol\\OneDrive\\Escritorio\\Nueva carpeta (2)";
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
 		//** Aca creo la vista
 		//devuelvo el string
 		//se lo paso por parametro al init core
 		ReportView view = new ReportView();
-		Controlador c = new Controlador(view);
-		
-		/*
-		while(view.getClickSi()==false) {
-			System.out.println("");
-			continue;
-		};
-		System.out.println("Pase");*/
-		
-		InitCore initCore = new InitCore(trackerDirectoryPath);
-		Core core = initCore.init(trackerImpl,reportDirectoryPath);
-		core.subscribe(view);
+		InitCore initCore = new InitCore();
+		Integrator integrator = initCore.init(trackerImpl,reportDirectoryPath, trackerDirectoryPath);
+		integrator.subscribe(view);
 
-		Timer timer = new Timer();
+ 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
 			@Override
 			public void run() {
 				try {
-					core.refresh();
+					integrator.refresh();
 				} catch (IOException e) {
 					throw new RuntimeException(e);
 				}
 			}
-		}, new Date(), 5000);
+		}, new Date(), 5000); 
 	}
 }

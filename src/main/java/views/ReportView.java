@@ -24,10 +24,7 @@ public class ReportView implements Observer {
 
 	private JFrame frame;
 	private JLabel titulo;
-	private JTextField inputUrl;
-	private Boolean clickBtn;
-	JButton btnUrl;
-	JPanel panelUrl;
+
 	
 
 	public ReportView() {
@@ -38,7 +35,6 @@ public class ReportView implements Observer {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		this.clickBtn = false;
 		frame = new JFrame();
 		ImageIcon icon = new ImageIcon("icon.png");
 		Image image = icon.getImage();
@@ -47,49 +43,12 @@ public class ReportView implements Observer {
 		frame.setBounds(700, 300, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
 		titulo = new JLabel("");
 		titulo.setBounds(10, 11, 352, 14);
 		frame.getContentPane().add(titulo);
-		
-	    panelUrl = new JPanel();
-		panelUrl.setBounds(0, 21, 424, 229);
-		frame.getContentPane().add(panelUrl);
-		panelUrl.setLayout(null);
-		
-		inputUrl = new JTextField();
-		inputUrl.setBounds(10, 104, 212, 20);
-		panelUrl.add(inputUrl);
-		inputUrl.setColumns(10);
-		
-		JLabel urlRepositorio = new JLabel("Por favor ingresar ubicación del repositorio");
-		urlRepositorio.setBounds(10, 79, 212, 14);
-		panelUrl.add(urlRepositorio);
-		
-		btnUrl = new JButton("Aceptar");
-		btnUrl.setBounds(232, 103, 89, 23);
-		panelUrl.add(btnUrl);
-		this.frame.setVisible(true);
-					
-		/*EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {		
-					setTitle("User Story: Actualizacion de reportes");
-					Map<String,Boolean> map = new HashMap<String,Boolean>();
-					map.put("Iniciar Core", true);
-					map.put("Buscar Reporte nuevo", true);
-					map.put("Crear Reporte ", true);
-					map.put("Devolver Reporte", true);
-					setDinamicPanels(map);
-				} catch (Exception e) {
-					e.printStackTrace();
-				} 
-			}
-		});*/
+		this.frame.setVisible(true);			
+	
 	}
-
-	
-	
 	public void  setDinamicPanels(Map<String,Boolean> test){
 		Iterator<String> it = test.keySet().iterator();
 		int i = 0;
@@ -122,8 +81,6 @@ public class ReportView implements Observer {
 		}
 		
 	}
-	
-	
 	public void setTitle(String title) {
 		
 		titulo = new JLabel("");
@@ -132,7 +89,6 @@ public class ReportView implements Observer {
 		this.titulo.setText(title);
 		
 	}
-
 	@Override
 	public void update(Object object) {
 		this.eliminarElementosPanel();
@@ -141,33 +97,14 @@ public class ReportView implements Observer {
 		this.setDinamicPanels(r.getTests());
 	}
 	
-	
 	public void eliminarElementosPanel() {
 		frame.getContentPane().removeAll();
 		frame.repaint();
 	}
 	
-	public void ocultarPantalla() {
-		this.panelUrl.setVisible(false);
-	}
+
 	
-	//Getters
-	public JButton  getBtn(){
-		return  this.btnUrl;
-	}
-	
-	public String getTextoInput() {
-		return  this.inputUrl.getText();
-	}
-	
-	
-	public void  setBtnTrue() {
-		this.clickBtn=true;
-	}
-	
-	public Boolean getClickSi() {
-		return this.clickBtn;
-	}
+
 	
 	
 	
