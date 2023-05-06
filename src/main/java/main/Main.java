@@ -1,23 +1,39 @@
 package main;
 
-import controllers.ReportController;
-import core.App;
+import core.InitCore;
+import core.Integrator;
 import views.ReportView;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+
+
 public class Main {
-
-	 public static void main(String[] args) {
-
-		App pvCore = new App();
-		pvCore.initChecker();
-		
+	static String trackerDirectoryPath = "C:\\Users\\Nicol\\git\\core-module2\\bin\\main\\InterfacesImpl";
+	static String trackerImpl = "InterfacesImpl.DefaultReportTracker";
+	static String reportDirectoryPath = "C:\\Users\\Nicol\\OneDrive\\Escritorio\\Nueva carpeta (2)";
+	public static void main(String[] args) throws IOException, ClassNotFoundException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
+		//** Aca creo la vista
+		//devuelvo el string
+		//se lo paso por parametro al init core
 		ReportView view = new ReportView();
-		
-		ReportController controller = new ReportController(pvCore.updater,view);
-		pvCore.report.addObserver(controller);
-		
-		view.initWindow();
-		
-	 }
+		InitCore initCore = new InitCore();
+		Integrator integrator = initCore.init(trackerImpl,reportDirectoryPath, trackerDirectoryPath);
+		integrator.subscribe(view);
 
+ 		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				try {
+					integrator.refresh();
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		}, new Date(), 5000); 
+	}
 }
