@@ -1,7 +1,8 @@
 package main;
 
 import core.InitCore;
-import core.Integrator;
+import core.NewCore;
+import core.TestResult;
 import views.ReportView;
 
 import java.io.IOException;
@@ -21,19 +22,7 @@ public class Main {
 		//se lo paso por parametro al init core
 		ReportView view = new ReportView();
 		InitCore initCore = new InitCore();
-		Integrator integrator = initCore.init(trackerImpl,reportDirectoryPath, trackerDirectoryPath);
-		integrator.subscribe(view);
-
- 		Timer timer = new Timer();
-		timer.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				try {
-					integrator.refresh();
-				} catch (IOException e) {
-					throw new RuntimeException(e);
-				}
-			}
-		}, new Date(), 5000); 
+		NewCore c = new NewCore();
+ 		
 	}
 }

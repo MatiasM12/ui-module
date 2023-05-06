@@ -14,7 +14,7 @@ import java.awt.Color;
 import javax.swing.border.LineBorder;
 
 import core.Observer;
-import core.ReportResult;
+//import core.ReportResult;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -92,9 +92,9 @@ public class ReportView implements Observer {
 	@Override
 	public void update(Object object) {
 		this.eliminarElementosPanel();
-		ReportResult r = (ReportResult) object;
-		this.setTitle(r.getAssociatedUs());
-		this.setDinamicPanels(r.getTests());
+		//ReportResult r = (ReportResult) object;
+//		this.setTitle(r.getAssociatedUs());
+//		this.setDinamicPanels(r.getTests());
 	}
 	
 	public void eliminarElementosPanel() {
