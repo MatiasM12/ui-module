@@ -5,13 +5,13 @@
 # This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
 
-name: Java CI with Gradle
+name: Java CI with Gradle 
 
-on:
+on: 
   push:
     branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main" ] 
 
 permissions:
   contents: read
@@ -40,26 +40,23 @@ jobs:
       
     - name: Test with Gradle
       run: ./gradlew test
+      
     - name: Publish artifact
       uses: actions/upload-artifact@v2
       with:
         name: my-artifact
-        path: build/libs/*.jar
+        path: build/libs/*.jar   
         
-    - name: Archive Test Results
+    - name: Upload Test Results
       uses: actions/upload-artifact@v2
       with:
         name: test-results
-        path: build/reports/tests/test/
+        path: build/test-results/test
+
   
     - name: Download Test Results
       uses: actions/download-artifact@v2
       with:
         name: test-results
         path: test-results
-    
-    - name: Publish Test Results as Github Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.TOKEN }}
-        publish_dir: ./test-results/
+        
