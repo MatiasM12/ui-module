@@ -6,7 +6,7 @@ package ui;
 import org.junit.jupiter.api.Test;
 
 
-import core.ReportResult;
+
 
 
 import static org.junit.jupiter.api.Assertions.*;

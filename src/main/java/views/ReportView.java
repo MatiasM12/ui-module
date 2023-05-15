@@ -14,7 +14,6 @@ import java.awt.Color;
 import javax.swing.border.LineBorder;
 
 import core.Observer;
-import core.ReportResult;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -23,7 +22,6 @@ import javax.swing.JButton;
 public class ReportView implements Observer {
 
 	private JFrame frame;
-	private JLabel titulo;
 
 	
 
@@ -43,13 +41,10 @@ public class ReportView implements Observer {
 		frame.setBounds(700, 300, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		titulo = new JLabel("");
-		titulo.setBounds(10, 11, 352, 14);
-		frame.getContentPane().add(titulo);
 		this.frame.setVisible(true);			
 	
 	}
-	public void  setDinamicPanels(Map<String,Boolean> test){
+	public void  setDinamicPanels(Map<String,String> test){
 		Iterator<String> it = test.keySet().iterator();
 		int i = 0;
 		while(it.hasNext()){
@@ -61,13 +56,13 @@ public class ReportView implements Observer {
 			frame.getContentPane().add(panel);
 			panel.setLayout(null);
 			
-			JLabel tituloCritero = new JLabel("CA "+(i+1)+" : "+key);
+			JLabel tituloCritero = new JLabel(key);
 			tituloCritero.setBounds(0, 0, 217, 14);
 			panel.add(tituloCritero);
 			
 			JPanel panel_1 = new JPanel();
 		
-			if(test.get(key) == true)
+			if(test.get(key).equals("PASS"))
 				panel_1.setBackground(Color.GREEN);
 			else
 				panel_1.setBackground(Color.RED);
@@ -81,20 +76,11 @@ public class ReportView implements Observer {
 		}
 		
 	}
-	public void setTitle(String title) {
-		
-		titulo = new JLabel("");
-		titulo.setBounds(10, 11, 352, 14);
-		frame.getContentPane().add(titulo);
-		this.titulo.setText(title);
-		
-	}
 	@Override
 	public void update(Object object) {
 		this.eliminarElementosPanel();
-		ReportResult r = (ReportResult) object;
-		this.setTitle(r.getAssociatedUs());
-		this.setDinamicPanels(r.getTests());
+		Map <String,String> map= (HashMap<String,String>) object;
+		this.setDinamicPanels(map);
 	}
 	
 	public void eliminarElementosPanel() {
