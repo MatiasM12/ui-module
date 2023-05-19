@@ -25,7 +25,8 @@ public class ReportView implements Observer {
 
 	
 
-	public ReportView() {
+	public ReportView(Observable o) {
+		o.addObservers(this);
 		initialize();
 	}
 
