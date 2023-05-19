@@ -21,17 +21,9 @@ public class Main {
 		String trackerImp = "TrackerHub";
 		String url = "www.github.com";
 		
-		ReportView view = new ReportView();
+		
 		InitCore initCore = new InitCore(url,findersImplPath);
-		Mediador m = initCore.init(trackerImp);
-		m.addObserver(view);
-
- 		Timer timer = new Timer();
-		timer.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				m.newChanges();
-			}
-		}, new Date(), 5000); 
-	}
+		Observable o = initCore.init(trackerImp);
+		ReportView view = new ReportView(o);
+		
 }
