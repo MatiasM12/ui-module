@@ -22,8 +22,8 @@ public class Main {
 		String url = "www.github.com";
 		
 		
-		InitCore initCore = new InitCore(url,findersImplPath);
-		Observable o = initCore.init(trackerImp);
+		ObservableFactory f = new ObservableFactory();
+		Observable o = f.createObservable(args[1]);
 		ReportView view = new ReportView(o);
 		
 }
