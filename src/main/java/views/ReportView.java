@@ -13,7 +13,10 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
 
+import core.Observable;
 import core.Observer;
+import core.Provider;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -25,8 +28,8 @@ public class ReportView implements Observer {
 
 	
 
-	public ReportView(Observable o) {
-		o.addObservers(this);
+	public ReportView(Provider provider) {
+		provider.suscribeObserver(this);
 		initialize();
 	}
 
@@ -45,7 +48,7 @@ public class ReportView implements Observer {
 		this.frame.setVisible(true);			
 	
 	}
-	public void  setDinamicPanels(Map<String,String> test){
+	public void  setDinamicPanels(Map<String,Boolean> test){
 		Iterator<String> it = test.keySet().iterator();
 		int i = 0;
 		while(it.hasNext()){
@@ -80,7 +83,7 @@ public class ReportView implements Observer {
 	@Override
 	public void update(Object object) {
 		this.eliminarElementosPanel();
-		Map <String,String> map= (HashMap<String,String>) object;
+		Map <String,Boolean> map= (HashMap<String,Boolean>) object;
 		this.setDinamicPanels(map);
 	}
 	

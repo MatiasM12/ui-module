@@ -1,7 +1,9 @@
 package main;
 
 import core.InitCore;
+import core.InitProviderTS;
 import core.Mediador;
+import core.Provider;
 import views.ReportView;
 
 import java.io.IOException;
@@ -17,13 +19,13 @@ public class Main {
 		//** Aca creo la vista
 		//devuelvo el string
 		//se lo paso por parametro al init core
-		String findersImplPath = "plugins";
-		String trackerImp = "TrackerHub";
-		String url = "www.github.com";
-		
-		
-		ObservableFactory f = new ObservableFactory();
-		Observable o = f.createObservable(args[1]);
-		ReportView view = new ReportView(o);
+		String pluginsImplPath = "plugins";
+		String US = "US1";
+		String pluginImpl = "pluginImpl";
+
+		InitProviderTS initProviderTS = new InitProviderTS();
+		Provider provider = initProviderTS.init(new String[]{US, pluginsImplPath});
+
+		ReportView view = new ReportView(provider);
 		
 }
