@@ -15,7 +15,7 @@ public class Main {
 		//se lo paso por parametro al init core
 		String pluginsImplPath = "Factory";
 		String US = "US1";
-		String pluginImpl = "PluginWithTimerFactory";
+		//String pluginImpl = "PluginWithTimerFactory";
 
 		InitProviderTS initProviderTS = new InitProviderTS();
 		Provider provider = initProviderTS.init(new String[]{US,"",pluginsImplPath});

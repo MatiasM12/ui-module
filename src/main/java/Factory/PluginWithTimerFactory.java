@@ -1,4 +1,4 @@
-package factoryImpl;
+package Factory;
 
 import core.Factory;
 import core.TestSummary;
