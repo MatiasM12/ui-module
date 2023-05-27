@@ -29,8 +29,8 @@ public class ReportView implements Observer {
 	
 
 	public ReportView(Provider provider) {
-		provider.suscribeObserver(this);
 		initialize();
+		provider.suscribeObserver(this);
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class ReportView implements Observer {
 			
 			JPanel panel_1 = new JPanel();
 		
-			if(test.get(key).equals("PASS"))
+			if(test.get(key))
 				panel_1.setBackground(Color.GREEN);
 			else
 				panel_1.setBackground(Color.RED);
@@ -82,6 +82,7 @@ public class ReportView implements Observer {
 	}
 	@Override
 	public void update(Object object) {
+		System.out.println("HolaView");
 		this.eliminarElementosPanel();
 		Map <String,Boolean> map= (HashMap<String,Boolean>) object;
 		this.setDinamicPanels(map);

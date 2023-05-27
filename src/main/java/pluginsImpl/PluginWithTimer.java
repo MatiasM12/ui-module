@@ -12,13 +12,14 @@ public class PluginWithTimer extends DecoratorTestSummary {
     }
     @Override
     public TestSummary update(Map<String, Boolean> m) {
-        return null;
+        return super.ts.update(m);
     }
     private void initTimer(){
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
+                System.out.println("Hola");
                 update(randomTest());
             }
         }, new Date(), 10000);
