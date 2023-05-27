@@ -82,7 +82,6 @@ public class ReportView implements Observer {
 	}
 	@Override
 	public void update(Object object) {
-		System.out.println("HolaView");
 		this.eliminarElementosPanel();
 		Map <String,Boolean> map= (HashMap<String,Boolean>) object;
 		this.setDinamicPanels(map);

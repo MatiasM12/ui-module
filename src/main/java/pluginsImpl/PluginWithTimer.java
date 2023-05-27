@@ -19,7 +19,6 @@ public class PluginWithTimer extends DecoratorTestSummary {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                System.out.println("Hola");
                 update(randomTest());
             }
         }, new Date(), 10000);

@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f774c606-323a-49bc-ac92-13086d985c15" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pluginsImpl/PluginWithTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pluginsImpl/PluginWithTimer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/views/ReportView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/ReportView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
