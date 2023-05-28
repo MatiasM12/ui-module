@@ -13,12 +13,9 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
 
-import core.Observable;
-import core.Observer;
-import core.Provider;
 
-import javax.swing.JTextField;
-import javax.swing.JButton;
+import Interfaces.Observer;
+import core.ObservableTS;
 
 
 
@@ -28,9 +25,9 @@ public class ReportView implements Observer {
 
 	
 
-	public ReportView(Provider provider) {
+	public ReportView(ObservableTS observableTS) {
 		initialize();
-		provider.suscribeObserver(this);
+		observableTS.addObserver(this);
 	}
 
 	/**

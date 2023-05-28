@@ -1,7 +1,7 @@
-package main;
+package pluginsImpl;
 
-import core.InitProviderTS;
-import core.Provider;
+import CoreInicialization.ObservableTSInit;
+import core.ObservableTS;
 import views.ReportView;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -13,14 +13,15 @@ public class Main {
 		//** Aca creo la vista
 		//devuelvo el string
 		//se lo paso por parametro al init core
-		String pluginsImplPath = "Factory";
+		String repo = "Repo";
 		String US = "US1";
-		//String pluginImpl = "PluginWithTimerFactory";
+		String plugin = "Main.PluginWithTimer";
+		String pluginPath = "C:\\Users\\Usuario\\IntelliJ-Workspace\\VALKIRIA\\ui-module\\Main";
 
-		InitProviderTS initProviderTS = new InitProviderTS();
-		Provider provider = initProviderTS.init(new String[]{US,"",pluginsImplPath});
+		ObservableTSInit init = new ObservableTSInit();
+		ObservableTS observableTS = init.init(new String[]{repo,US, plugin, pluginPath});
 
-		ReportView view = new ReportView(provider);
+		ReportView view = new ReportView(observableTS);
 	}
 		
 }
