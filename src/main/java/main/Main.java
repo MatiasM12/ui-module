@@ -1,16 +1,10 @@
 package main;
 
-import core.InitCore;
-import core.InitProviderTS;
-import core.Mediador;
-import core.Provider;
+import coreInicialization.ObservableTSInit;
+import core.ObservableTS;
 import views.ReportView;
-
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public class Main {
@@ -19,13 +13,14 @@ public class Main {
 		//** Aca creo la vista
 		//devuelvo el string
 		//se lo paso por parametro al init core
-		String pluginsImplPath = "plugins";
+		String repo = "Repo";
 		String US = "US1";
-		String pluginImpl = "pluginImpl";
+		String plugin = "PluginWithTimer";
+		String pluginPath = "plugins";
 
-		InitProviderTS initProviderTS = new InitProviderTS();
-		Provider provider = initProviderTS.init(new String[]{US, pluginsImplPath});
-
-		ReportView view = new ReportView(provider);
+		ObservableTSInit init = new ObservableTSInit();
+		ObservableTS observableTS = init.init(new String[]{repo,US, plugin, pluginPath});
+		ReportView view = new ReportView(observableTS);
+	}
 		
 }
