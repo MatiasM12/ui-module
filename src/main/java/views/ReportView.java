@@ -13,8 +13,10 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
 
-
+import Imp.TSResultDefault;
+import Interfaces.Observable;
 import Interfaces.Observer;
+import Interfaces.TestSummary;
 import core.ObservableTS;
 import java.awt.Font;
 
@@ -23,12 +25,12 @@ import java.awt.Font;
 public class ReportView implements Observer {
 
 	private JFrame frame;
-
+	private JLabel lblNewLabel;
 	
 
-	public ReportView(ObservableTS observableTS) {
+	public ReportView(Observable observable) {
 		initialize();
-		observableTS.addObserver(this);
+		observable.addObserver(this);
 	}
 
 	/**
@@ -44,7 +46,7 @@ public class ReportView implements Observer {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("User Story 1");
+		lblNewLabel = new JLabel("");
 		lblNewLabel.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 16));
 		lblNewLabel.setBounds(10, 11, 107, 22);
 		frame.getContentPane().add(lblNewLabel);
@@ -83,15 +85,16 @@ public class ReportView implements Observer {
 		}
 		
 	}
-	@Override
-	public void update(Object object) {
-		@SuppressWarnings("unchecked")
-		Map <String,Boolean> map= (HashMap<String,Boolean>) object;
-		this.setDinamicPanels(map);
-	}
+	
 	
 	public void eliminarElementosPanel() {
 		frame.getContentPane().removeAll();
 		frame.repaint();
+	}
+
+	@Override
+	public void update(TestSummary ts) {
+		lblNewLabel.setText(((TSResultDefault)ts).getUS());
+		this.setDinamicPanels(((TSResultDefault)ts).getCA());
 	}
 }

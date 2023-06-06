@@ -1,10 +1,12 @@
 package main;
 
-import coreInicialization.ObservableTSInit;
 import core.ObservableTS;
+import coreInicialization.ObservableInit;
 import views.ReportView;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+
+import Interfaces.Observable;
 
 
 public class Main {
@@ -13,14 +15,11 @@ public class Main {
 		//** Aca creo la vista
 		//devuelvo el string
 		//se lo paso por parametro al init core
-		String repo = "Repo";
-		String US = "US1";
-		String plugin = "PluginWithTimer";
 		String pluginPath = "plugins";
-
-		ObservableTSInit init = new ObservableTSInit();
-		ObservableTS observableTS = init.init(new String[]{repo,US, plugin, pluginPath});
+    	String ImplPlugin = "OriginImp.timerTS";
+    	String us = "US1";
+    	String url = "url";
+		Observable observableTS = new ObservableInit().init(new String[] {url,us,ImplPlugin,pluginPath});
 		ReportView view = new ReportView(observableTS);
 	}
-		
 }
