@@ -1,7 +1,7 @@
 package main;
 
 import core.ObservableTS;
-import coreInicialization.ObservableInit;
+import coreInicialization.Core;
 import views.ReportView;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -16,10 +16,10 @@ public class Main {
 		//devuelvo el string
 		//se lo paso por parametro al init core
 		String pluginPath = "plugins";
-    	String ImplPlugin = "OriginImp.timerTS";
+    	String ImplPlugin = "TimerTS"; 
     	String us = "US1";
     	String url = "url";
-		Observable observableTS = new ObservableInit().init(new String[] {url,us,ImplPlugin,pluginPath});
+		Observable observableTS = new Core().init(new String[] {url,us,ImplPlugin,pluginPath});
 		ReportView view = new ReportView(observableTS);
 	}
 }

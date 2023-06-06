@@ -1,8 +1,6 @@
 package views;
 
-import java.awt.EventQueue;
 import java.awt.Image;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -13,11 +11,10 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
 
-import Imp.TSResultDefault;
+import core.TSResultDefault;
 import Interfaces.Observable;
 import Interfaces.Observer;
 import Interfaces.TestSummary;
-import core.ObservableTS;
 import java.awt.Font;
 
 
@@ -29,7 +26,7 @@ public class ReportView implements Observer {
 	
 
 	public ReportView(Observable observable) {
-		initialize();
+		initialize(); 
 		observable.addObserver(this);
 	}
 
