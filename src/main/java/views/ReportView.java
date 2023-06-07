@@ -1,10 +1,16 @@
 package views;
 
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,6 +21,8 @@ import core.TSResultDefault;
 import Interfaces.Observable;
 import Interfaces.Observer;
 import Interfaces.TestSummary;
+import controllers.TSController;
+
 import java.awt.Font;
 
 
@@ -23,9 +31,12 @@ public class ReportView implements Observer {
 
 	private JFrame frame;
 	private JLabel lblNewLabel;
+	public JComboBox<Object> comboBox;
+	private TSController controller;
 	
 
 	public ReportView(Observable observable) {
+		this.controller = new TSController(this, observable);
 		initialize(); 
 		observable.addObserver(this);
 	}
@@ -47,6 +58,11 @@ public class ReportView implements Observer {
 		lblNewLabel.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 16));
 		lblNewLabel.setBounds(10, 11, 107, 22);
 		frame.getContentPane().add(lblNewLabel);
+		
+        comboBox = new JComboBox<>();
+        comboBox.setBounds(300, 15, 110, 22);
+        frame.getContentPane().add(comboBox);
+        
 		this.frame.setVisible(true);			
 	
 	}
@@ -84,7 +100,17 @@ public class ReportView implements Observer {
 	}
 	
 	
-	public void eliminarElementosPanel() {
+	public void setFilters(List<String> valuesList) {
+        comboBox.removeAllItems();
+        comboBox.addItem("Todos");
+        for (String key : valuesList) {
+            comboBox.addItem(key);
+        }
+        frame.getContentPane().add(comboBox);
+	}
+	
+	
+	public void removeElementsOfPanel() {
 		frame.getContentPane().removeAll();
 		frame.repaint();
 	}
@@ -92,6 +118,9 @@ public class ReportView implements Observer {
 	@Override
 	public void update(TestSummary ts) {
 		lblNewLabel.setText(((TSResultDefault)ts).getUS());
-		this.setDinamicPanels(((TSResultDefault)ts).getCA());
+		setDinamicPanels(((TSResultDefault)ts).getCA());
+		controller.setFilters(ts);
 	}
+
+
 }
