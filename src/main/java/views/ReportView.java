@@ -29,8 +29,8 @@ import java.awt.Font;
 
 public class ReportView implements Observer {
 
-	private JFrame frame;
-	private JLabel lblNewLabel;
+	public JFrame frame;
+	public JLabel lblNewLabel;
 	public JComboBox<Object> comboBox;
 	private TSController controller;
 	
@@ -62,6 +62,14 @@ public class ReportView implements Observer {
         comboBox = new JComboBox<>();
         comboBox.setBounds(300, 15, 110, 22);
         frame.getContentPane().add(comboBox);
+        comboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedItem = (String) comboBox.getSelectedItem();
+                controller.applyFilter(selectedItem);
+                comboBox.setSelectedItem(selectedItem);
+            }
+        });
         
 		this.frame.setVisible(true);			
 	
@@ -117,9 +125,13 @@ public class ReportView implements Observer {
 
 	@Override
 	public void update(TestSummary ts) {
-		lblNewLabel.setText(((TSResultDefault)ts).getUS());
+		setUs(ts);
 		setDinamicPanels(((TSResultDefault)ts).getCA());
-		controller.setFilters(ts);
+		if(controller.getCategories(ts) != null ) setFilters(controller.getCategories(ts));
+	}
+
+	public void setUs(TestSummary ts) {
+		lblNewLabel.setText(((TSResultDefault)ts).getUS());
 	}
 
 

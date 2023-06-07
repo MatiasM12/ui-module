@@ -17,6 +17,7 @@ public class TSController implements Observer{
 
 	private ReportView view;
 	private Observable observableTS;
+	private TestSummary ts; // esto nose s debveria ir aca pero lo puse para probar
 	
 	public TSController(ReportView view, Observable observableTS){
 		this.view = view;
@@ -27,15 +28,16 @@ public class TSController implements Observer{
 
 	@Override
 	public void update(TestSummary ts) {
+		this.ts = ts;// para probar tambien
 	}
 	
-	private Map<String,Boolean> applyFilter(TestSummary ts) {
-		//aca deberia aplicar el filtro
+	public Map<String,Boolean> applyFilter(String category) { 
+		//aca deberia aplicar el filtro, esta mal solo lo hice apra probar
 		if(selectedFilter() == "Todos") return ((TSResultDefault)ts).getCA();
 		Map<String,String> categories =((TSResultDefault)ts).getAllCategories();
 		List<String> keys = new ArrayList<>();
         for (String key : categories.keySet()) {
-            if (categories.get(key).equals(selectedFilter())) {
+            if (categories.get(key).equals(category)) {
                 keys.add(key);
             }
         }
@@ -46,9 +48,11 @@ public class TSController implements Observer{
                 filteredMap.put(key, ca.get(key));
             }
         }
-        System.out.println(filteredMap);
         view.removeElementsOfPanel();
-        view.setDinamicPanels(filteredMap);
+        
+        view.lblNewLabel.setText(((TSResultDefault)ts).getUS());
+		if(getCategories(ts) != null ) view.setFilters(getCategories(ts));
+		view.setDinamicPanels(filteredMap);
 		return filteredMap;
 	}
 
@@ -59,7 +63,10 @@ public class TSController implements Observer{
 	
 	
 
-	public void setFilters(TestSummary ts) {
-		view.setFilters(new ArrayList<String>(((TSResultDefault)ts).getAllCategories().values()));
+	public ArrayList<String> getCategories(TestSummary ts) {
+		if(((TSResultDefault) ts).getAllCategories() != null) return new ArrayList<String>(((TSResultDefault)ts).getAllCategories().values());
+		return null;
 	}
+	
+	
 }
