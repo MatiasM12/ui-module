@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -50,7 +51,7 @@ public class ReportView implements Observer {
 		Image image = icon.getImage();
 		frame.setIconImage(image);
 		frame.setTitle("Proyecto Valquiria");
-		frame.setBounds(700, 300, 445, 350);
+		frame.setBounds(700, 300, 442, 390);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -66,9 +67,10 @@ public class ReportView implements Observer {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String selectedItem = (String) comboBox.getSelectedItem();
-                controller.applyFilter(selectedItem);
+                applyFilter(selectedItem);
                 comboBox.setSelectedItem(selectedItem);
             }
+
         });
         
 		this.frame.setVisible(true);			
@@ -108,13 +110,23 @@ public class ReportView implements Observer {
 	}
 	
 	
-	public void setFilters(List<String> valuesList) {
+	public void setFilters(Set<String> valuesList) {
         comboBox.removeAllItems();
         comboBox.addItem("Todos");
         for (String key : valuesList) {
             comboBox.addItem(key);
         }
         frame.getContentPane().add(comboBox);
+        
+	}
+	
+	public void applyFilter(String selectedItem) {
+		Map<String,Boolean> filter = controller.applyFilter(selectedItem);
+		removeElementsOfPanel();
+		frame.getContentPane().add(lblNewLabel);
+		setDinamicPanels(filter);
+		setUs(getUS());
+		if(controller.getCategories() != null ) setFilters(controller.getCategories());
 	}
 	
 	
@@ -125,14 +137,18 @@ public class ReportView implements Observer {
 
 	@Override
 	public void update(TestSummary ts) {
-		setUs(ts);
+		setUs(((TSResultDefault)ts).getUS());
 		setDinamicPanels(((TSResultDefault)ts).getCA());
-		if(controller.getCategories(ts) != null ) setFilters(controller.getCategories(ts));
+		if(controller.getCategories() != null ) setFilters(controller.getCategories());
+		
 	}
 
-	public void setUs(TestSummary ts) {
-		lblNewLabel.setText(((TSResultDefault)ts).getUS());
+	public void setUs(String string) {
+		lblNewLabel.setText(string);
 	}
 
+	public String getUS() {
+		return controller.getUS();
+	}
 
 }
