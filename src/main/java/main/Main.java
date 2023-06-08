@@ -1,6 +1,5 @@
 package main;
 
-import core.ObservableTS;
 import coreInicialization.Core;
 import views.ReportView;
 import java.io.IOException;
