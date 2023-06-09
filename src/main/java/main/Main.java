@@ -15,8 +15,8 @@ public class Main {
 		// se lo paso por parametro al init core
 		String pluginPath = "plugins";
 		String ImplPlugin = "DefaultTS";
-		String us = "US1";
-		String url = "url";
+		String us = "core-module";
+		String url = "MatiasM12";
 		Core core = new Core();
 		Observable observableTS = core.init(new String[] { url, us, ImplPlugin, pluginPath });
 		ReportView view = new ReportView(observableTS, core);

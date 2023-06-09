@@ -82,7 +82,6 @@ public class ReportView implements Observer {
 		frame.getContentPane().add(comboBox_Plugins);
 		comboBox_Plugins.addActionListener(new ActionListener() {
 			Boolean flag = true;
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String selectedItem = (String) comboBox_Plugins.getSelectedItem();
