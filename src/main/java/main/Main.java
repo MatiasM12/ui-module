@@ -19,8 +19,9 @@ public class Main {
     	String ImplPlugin = "TSWithCategories"; 
     	String us = "US1";
     	String url = "url";
-		Observable observableTS = new Core().init(new String[] {url,us,ImplPlugin,pluginPath});
-		ReportView view = new ReportView(observableTS);
+    	Core core = new Core();
+		Observable observableTS = core.init(new String[] {url,us,ImplPlugin,pluginPath});
+		ReportView view = new ReportView(observableTS, core);
 
 		
 	}

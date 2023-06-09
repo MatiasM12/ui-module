@@ -3,6 +3,8 @@ package views;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -14,11 +16,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
 
 import core.TSResultDefault;
+import coreInicialization.Core;
 import Interfaces.Observable;
 import Interfaces.Observer;
 import Interfaces.TestSummary;
@@ -34,10 +38,11 @@ public class ReportView implements Observer {
 	public JLabel lblNewLabel;
 	public JComboBox<Object> comboBox;
 	private TSController controller;
+	private JComboBox<Object> comboBox_Plugins;
 	
 
-	public ReportView(Observable observable) {
-		this.controller = new TSController(this, observable);
+	public ReportView(Observable observable, Core core) {
+		this.controller = new TSController(this, observable, core);
 		initialize(); 
 		observable.addObserver(this);
 	}
@@ -63,18 +68,49 @@ public class ReportView implements Observer {
         comboBox = new JComboBox<>();
         comboBox.setBounds(300, 15, 110, 22);
         frame.getContentPane().add(comboBox);
+        
+        comboBox_Plugins = new JComboBox<>();
+        comboBox_Plugins.setBounds(166, 13, 130, 27);
+        frame.getContentPane().add(comboBox_Plugins);
         comboBox.addActionListener(new ActionListener() {
+        	Boolean flag = true;
             @Override
             public void actionPerformed(ActionEvent e) {
-                String selectedItem = (String) comboBox.getSelectedItem();
-                applyFilter(selectedItem);
-                comboBox.setSelectedItem(selectedItem);
+            	if(flag) {
+            		flag = false;
+            	}else {
+            		String selectedItem = (String) comboBox.getSelectedItem();
+                    applyFilter(selectedItem);
+                    comboBox.setSelectedItem(selectedItem);
+            	}            
             }
 
         });
-        
-		this.frame.setVisible(true);			
-	
+        comboBox_Plugins.addActionListener(new ActionListener() {
+            Boolean flag = true;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedItem = (String) comboBox_Plugins.getSelectedItem();
+                try {
+                	if(flag) {
+                		flag = false;
+                	}else {
+                		Boolean b = controller.changePlugin(selectedItem);
+                		if(b) {
+                			comboBox_Plugins.setSelectedItem(selectedItem);
+                		}else {
+                			JOptionPane.showMessageDialog(null, "No se pudo cambiar el plugin");
+                		}
+                		
+                	}
+				} catch (FileNotFoundException | ClassNotFoundException | InvocationTargetException
+						| InstantiationException | IllegalAccessException | NoSuchMethodException e1) {
+					e1.printStackTrace();
+				}
+            }
+
+        });
+		this.frame.setVisible(true);
 	}
 	public void  setDinamicPanels(Map<String,Boolean> test){
 		Iterator<String> it = test.keySet().iterator();
@@ -116,31 +152,42 @@ public class ReportView implements Observer {
         for (String key : valuesList) {
             comboBox.addItem(key);
         }
-        frame.getContentPane().add(comboBox);
-        
+	}
+	
+	public void setPlugins(String[] valuesList) {
+        comboBox_Plugins.removeAllItems();
+        for (String key : valuesList) {
+            comboBox_Plugins.addItem(key);
+        }
+        frame.getContentPane().add(comboBox_Plugins);
 	}
 	
 	public void applyFilter(String selectedItem) {
 		Map<String,Boolean> filter = controller.applyFilter(selectedItem);
+		updatePane(filter);
+	}
+
+	private void updatePane(Map<String, Boolean> tests) {
 		removeElementsOfPanel();
 		frame.getContentPane().add(lblNewLabel);
-		setDinamicPanels(filter);
+		setDinamicPanels(tests);
 		setUs(getUS());
-		if(controller.getCategories() != null ) setFilters(controller.getCategories());
+		frame.repaint();
 	}
 	
 	
 	public void removeElementsOfPanel() {
 		frame.getContentPane().removeAll();
+        frame.getContentPane().add(comboBox_Plugins);
+        frame.getContentPane().add(comboBox);
 		frame.repaint();
 	}
 
 	@Override
 	public void update(TestSummary ts) {
-		setUs(((TSResultDefault)ts).getUS());
-		setDinamicPanels(((TSResultDefault)ts).getCA());
-		if(controller.getCategories() != null ) setFilters(controller.getCategories());
-		
+		updatePane(((TSResultDefault)ts).getCA());
+		setFilters(controller.getCategories());
+		setPlugins(controller.getPlugins());
 	}
 
 	public void setUs(String string) {
@@ -150,5 +197,4 @@ public class ReportView implements Observer {
 	public String getUS() {
 		return controller.getUS();
 	}
-
 }
