@@ -52,8 +52,8 @@ public class TSController implements Observer {
 	}
 
 	// fixme El repo no deberia estar harcodeado
-	public Boolean changePlugin(String selectedPlugin) throws FileNotFoundException, ClassNotFoundException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
-		return core.initImplementation(selectedPlugin, "", ((TSResultDefault) ts).getUS()).isSuccess();
+	public Boolean changePlugin(String selectedPlugin,String us) throws FileNotFoundException, ClassNotFoundException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
+		return core.initImplementation(selectedPlugin, "",us).isSuccess();
 	}
 
 }

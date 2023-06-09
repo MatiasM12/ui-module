@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
 
+import core.TSBadgeProyecto;
 import core.TSResultDefault;
 import coreInicialization.Core;
 import Interfaces.Observable;
@@ -33,7 +34,7 @@ public class ReportView implements Observer {
 	public JLabel lblNewLabel;
 	public JComboBox<Object> comboBox,comboBox_Plugins;
 	private TSController controller;
-	private JPanel panel_1, panel;
+	private JPanel panel_1, panel, panel3;
 
 	public ReportView(Observable observable, Core core) {
 		this.controller = new TSController(observable, core);
@@ -89,8 +90,10 @@ public class ReportView implements Observer {
 					if (flag)
 						flag = false;
 					else {
-						Boolean b = controller.changePlugin(selectedItem);
+						Boolean b = controller.changePlugin(selectedItem,lblNewLabel.getText());
 						if (b == false) {
+							System.out.println("Estoy dando false");
+							
 							JOptionPane.showMessageDialog(null,
 									"Hubo un error en la conexion, se reflejan los ultimos resultados obtenidos.");
 						} else
@@ -175,9 +178,27 @@ public class ReportView implements Observer {
 	@Override
 	public void update(TestSummary ts) {
 
+		try {
 		setPlugins(controller.getPlugins());
 		setFilters(controller.getCategories());
 		updatePane(((TSResultDefault) ts).getCA());
+		}
+		catch(Exception e) {
+			System.out.println("LLegue aca"+" "+((TSBadgeProyecto)ts).getBadge());
+			panel.setVisible(false);
+			this.panel3 = new JPanel();
+			panel3.setBounds(10, 50, 404, 36);
+			JLabel titulo = new JLabel("Estado Deploy");
+			titulo.setBounds(10, 10, 217, 14);
+			panel3.add(titulo);
+			panel3.setBackground(((TSBadgeProyecto)ts).getBadge() ?  Color.GREEN : Color.RED);
+			
+			this.panel3.setVisible(true);
+			frame.getContentPane().add(panel3);
+			
+			frame.repaint();
+		}
+		
 
 	}
 
