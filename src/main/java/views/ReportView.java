@@ -32,7 +32,7 @@ public class ReportView implements Observer {
 
 	public JFrame frame;
 	public JLabel lblNewLabel;
-	public JComboBox<Object> comboBox,comboBox_Plugins;
+	public JComboBox<Object> comboBox, comboBox_Plugins;
 	private TSController controller;
 	private JPanel panel_1, panel, panel3;
 
@@ -83,6 +83,7 @@ public class ReportView implements Observer {
 		frame.getContentPane().add(comboBox_Plugins);
 		comboBox_Plugins.addActionListener(new ActionListener() {
 			Boolean flag = true;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String selectedItem = (String) comboBox_Plugins.getSelectedItem();
@@ -90,10 +91,8 @@ public class ReportView implements Observer {
 					if (flag)
 						flag = false;
 					else {
-						Boolean b = controller.changePlugin(selectedItem,lblNewLabel.getText());
+						Boolean b = controller.changePlugin(selectedItem, lblNewLabel.getText());
 						if (b == false) {
-							System.out.println("Estoy dando false");
-							
 							JOptionPane.showMessageDialog(null,
 									"Hubo un error en la conexion, se reflejan los ultimos resultados obtenidos.");
 						} else
@@ -179,26 +178,24 @@ public class ReportView implements Observer {
 	public void update(TestSummary ts) {
 
 		try {
-		setPlugins(controller.getPlugins());
-		setFilters(controller.getCategories());
-		updatePane(((TSResultDefault) ts).getCA());
-		}
-		catch(Exception e) {
-			System.out.println("LLegue aca"+" "+((TSBadgeProyecto)ts).getBadge());
+			setPlugins(controller.getPlugins());
+			setFilters(controller.getCategories());
+			updatePane(((TSResultDefault) ts).getCA());
+		} catch (Exception e) {
+			System.out.println("LLegue aca" + " " + ((TSBadgeProyecto) ts).getBadge());
 			panel.setVisible(false);
 			this.panel3 = new JPanel();
 			panel3.setBounds(10, 50, 404, 36);
 			JLabel titulo = new JLabel("Estado Deploy");
 			titulo.setBounds(10, 10, 217, 14);
 			panel3.add(titulo);
-			panel3.setBackground(((TSBadgeProyecto)ts).getBadge() ?  Color.GREEN : Color.RED);
-			
+			panel3.setBackground(((TSBadgeProyecto) ts).getBadge() ? Color.GREEN : Color.RED);
+
 			this.panel3.setVisible(true);
 			frame.getContentPane().add(panel3);
-			
+
 			frame.repaint();
 		}
-		
 
 	}
 
