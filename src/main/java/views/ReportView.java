@@ -182,7 +182,6 @@ public class ReportView implements Observer {
 			setFilters(controller.getCategories());
 			updatePane(((TSResultDefault) ts).getCA());
 		} catch (Exception e) {
-			System.out.println("LLegue aca" + " " + ((TSBadgeProyecto) ts).getBadge());
 			panel.setVisible(false);
 			this.panel3 = new JPanel();
 			panel3.setBounds(10, 50, 404, 36);
