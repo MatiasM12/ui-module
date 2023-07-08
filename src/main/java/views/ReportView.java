@@ -91,10 +91,9 @@ public class ReportView implements Observer {
 					if (flag)
 						flag = false;
 					else {
-						Boolean b = controller.changePlugin(selectedItem, lblNewLabel.getText());
-						if (b == false) {
-							JOptionPane.showMessageDialog(null,
-									"Hubo un error en la conexion, se reflejan los ultimos resultados obtenidos.");
+						String b = controller.changePlugin(selectedItem, lblNewLabel.getText());
+						if (b.equals("Fallo en la primera conexión") || b.equals("Fallo en el reintento de conexión") ) {
+							JOptionPane.showMessageDialog(null,b);
 						} else
 							comboBox_Plugins.setSelectedItem(selectedItem);
 					}
